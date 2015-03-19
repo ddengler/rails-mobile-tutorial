@@ -14,16 +14,8 @@ Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.
 Getting Started
 ---------------
 
-This repository contains two branches:
+After Rails is installed properly, switch to the project directory and execute:
 
-- "basic" a basic app with json support via the integrated controllers
+bundle install
 
-- "api" a separated API with ActiveModelSerializers
-
-Documentation and Support
--------------------------
-
-License
--------
-
-MIT
+rails server
