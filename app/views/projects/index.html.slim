@@ -1,21 +1,7 @@
 h1 Listing projects
+p= link_to 'New Project', new_project_path, class: 'btn btn-primary'
 
-table
-  thead
-    tr
-      th Name
-      th
-      th
-      th
+ul.list-unstyled
+  - @projects.each do |project|
+    li= link_to project.name, project
 
-  tbody
-    - @projects.each do |project|
-      tr
-        td = project.name
-        td = link_to 'Show', project
-        td = link_to 'Edit', edit_project_path(project)
-        td = link_to 'Destroy', project, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Project', new_project_path

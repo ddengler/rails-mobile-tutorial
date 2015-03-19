@@ -1,9 +1,15 @@
-p#notice = notice
+h1= @project.name
 
-p
-  strong Name:
-  = @project.name
+ul.list-unstyled
+  - @project.todos.order(:done, :title).each do |todo|
+    li
+      = link_to todo_path(todo, todo: { done: !todo.done}), method: :put do
+        - if todo.done
+          s= todo.title
+        - else
+          span= todo.title
+  li
+    = render 'todos/form'
 
-= link_to 'Edit', edit_project_path(@project)
-'|
-= link_to 'Back', projects_path
+= link_to 'Edit', edit_project_path(@project), class: 'btn btn-default'
+= link_to 'Destroy', @project, data: {confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-default'

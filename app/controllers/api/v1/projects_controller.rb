@@ -1,41 +1,30 @@
-class ProjectsController < ApplicationController
+class Api::V1::ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  respond_to :json
 
-  # GET /projects
-  # GET /projects.json
   def index
     @projects = Project.all
+    render json: @projects, each_serializer: ProjectSerializer
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
-    @todo = Todo.new
+    render json: @project, serializer: ProjectSerializer
   end
 
-  # GET /projects/new
-  def new
-    @project = Project.new
-  end
-
-  # GET /projects/1/edit
-  def edit
-  end
-
-  # POST /projects
-  # POST /projects.json
   def create
     @project = Project.new(project_params)
 
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+      @project.save
+      # if @project.save
+      #   format.html { redirect_to @project, notice: 'Project was successfully created.' }
+      #   format.json { render :show, status: :created, location: @project }
+      # else
+      #   format.html { render :new }
+      #   format.json { render json: @project.errors, status: :unprocessable_entity }
+      # end
+      render json: @project, serializer: ProjectSerializer
+    # end
   end
 
   # PATCH/PUT /projects/1
